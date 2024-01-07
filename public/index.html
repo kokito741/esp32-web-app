@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ESP IoT Firebase App</title>
-
+    <!-- Load charts.js with the time axis extension -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <!-- update the version number as needed -->
     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
@@ -68,20 +69,35 @@
   </form>
 
   <!--CONTENT (SENSOR READINGS)-->
-  <div class="content-sign-in" id="content-sign-in" style="display: none;">
-    <div class="cards">
-      <!--TEMPERATURE-->
-      <div class="card">
-        <p><i class="fas fa-thermometer-half" style="color:#059e8a;"></i> TEMPERATURE</p>
-        <p><span class="reading"><span id="temp"></span> &deg;C</span></p>
-      </div>
-      <!--HUMIDITY-->
-      <div class="card">
-        <p><i class="fas fa-tint" style="color:#00add6;"></i> HUMIDITY</p>
-        <p><span class="reading"><span id="hum"></span> &percnt;</span></p>
-      </div>
+<div class="content-sign-in" id="content-sign-in" style="display: none;">
+  <div class="cards">
+    <!--TEMPERATURE-->
+    <div class="card">
+      <p><i class="fas fa-thermometer-half" style="color:#059e8a;"></i> TEMPERATURE</p>
+      <p><span class="reading"><span id="temp"></span> &deg;C</span></p>
+    </div>
+    <!--HUMIDITY-->
+    <div class="card">
+      <p><i class="fas fa-tint" style="color:#00add6;"></i> HUMIDITY</p>
+      <p><span class="reading"><span id="hum"></span> &percnt;</span></p>
     </div>
   </div>
-    <script src="scripts/index.js"></script>
+  <!--HISTOGRAPH-->
+  
+  <div class="card">
+    <p><i class="fas fa-thermometer-half" style="color:#059e8a;"></i> HISTOGRAPH PER HOUR</p>
+    <canvas id="myChart_PER_HOURS" style="width:90%; height:90%;"></canvas>
+  </div>
+  <div class="card">
+    <p><i class="fas fa-thermometer-half" style="color:#059e8a;"></i> HISTOGRAPH PER DAYS</p>
+    <canvas id="myChart_PER_DAYS" style="width:90%; height:90%;"></canvas>
+  </div>
+  <div class="card">
+    <p><i class="fas fa-thermometer-half" style="color:#059e8a;"></i> HISTOGRAPH PER MONTHS</p>
+    <canvas id="myChart_PER_MONTH" style="width:90%; height:90%;"></canvas>
+  </div>
+</div>
+<script src="scripts/index.js"></script>
+<script src="scripts/index.js"></script>
   </body>
 </html>
