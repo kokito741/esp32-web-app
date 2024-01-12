@@ -31,6 +31,8 @@ function setupUI(user) {
 
     function drawHistogram_PER_HOUR(uid) {
       // Define the start and end times
+      log.debug("start drawHistogram_PER_HOUR")
+      const start=performance.now();
       var startTime = moment().startOf('day'); // This sets the start time to the beginning of today
       var endTime = moment(); // This sets the end time to the current time
       var temperatures = [];
@@ -115,10 +117,16 @@ function setupUI(user) {
           }
         });
       });
+
+      const end = performance.now();
+      const executionTime = end - start;
+      console.log("drawHistogram_PER_HOUR Execution time: " + executionTime + "ms");
     }
     
     function drawHistogram_PER_DAY(uid) {
       // Define the start and end times
+      log.debug("start drawHistogram_PER_DAY")
+      const start=performance.now();
       var startTime = moment().startOf('month'); // This sets the start time to the beginning of the first day of the current month
       var endTime = moment().startOf('day'); // This sets the end time to the start of today
       var temperatures = [];
@@ -175,7 +183,6 @@ function setupUI(user) {
         var days = Array.from({length: daysInMonth}, (_, i) => moment().startOf('month').add(i, 'days').format('DD-MM-YYYY'));
         // After the loop, draw the histogram using the Chart.js library
         var ctx = document.getElementById('myChart_PER_DAYS').getContext('2d');
-        console.log(temperatures);
         var myChart_PER_DAYS = new Chart(ctx, {
           type: 'bar',
           data: {
@@ -209,10 +216,15 @@ function setupUI(user) {
           }
         });
       });
+      const end = performance.now();
+      const executionTime = end - start;
+      console.log("drawHistogram_PER_DAY Execution time: " + executionTime + "ms");
     }
 
     function drawHistogram_PER_MONTH(uid) {
       // Define the start and end times
+      log.debug("start drawHistogram_PER_DAY")
+      const start=performance.now();
       var startTime = moment().subtract(1, 'years').startOf('year'); // This sets the start time to the beginning of the previous year
       var endTime = moment(); // This sets the end time to the current time
       var temperatures = [];
@@ -228,18 +240,15 @@ function setupUI(user) {
         // Define the database paths
         var dbPathTemp = uid.toString()+'/Average per month/Living Room/'+ month + '/temperature';
         var dbPathHum = uid.toString()+'/Average per month/Living Room/'+ month + '/humidity';
-        console.log(dbPathTemp);
         // Get the temperature and humidity data from the Firebase database
         var dbRefTemp = firebase.database().ref().child(dbPathTemp);
         var dbRefHum = firebase.database().ref().child(dbPathHum);
-        console.log(dbRefTemp);
         // Get the temperature 
         var tempPromise = ((month) => {
           return dbRefTemp.once('value').then(snap => {
             var val = snap.val();
             if (val !== null && val !== undefined) {
               temperatures.push({month: month, value: val});
-              console.log(temperatures);
             }
           });
         })(month);
@@ -296,6 +305,9 @@ function setupUI(user) {
         });
         
       });
+      const end = performance.now();
+      const executionTime = end - start;
+      log.debug("drawHistogram_PER_MONTH Execution time: " + executionTime + "ms");
     }
 
 
