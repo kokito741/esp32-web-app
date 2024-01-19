@@ -69,6 +69,8 @@ function setupUI(user) {
             if (val !== null && val !== undefined) {
               temperatures.push({hours: hour, value: val});
             }
+          }).catch(error => {
+            console.error('Error reading data:', error);
           });
         })(hour);
         temperaturePromises.push(tempPromise);
@@ -81,6 +83,8 @@ function setupUI(user) {
             if (val !== null && val !== undefined) {
               humidities.push({hours: hour, value: val});
             }
+          }).catch(error => {
+            console.error('Error reading data:', error);
           });
         })(hour);
         humidityPromises.push(humPromise);
@@ -136,6 +140,8 @@ function setupUI(user) {
             }
           }
         });
+      }).catch(error => {
+        console.error('Error reading data:', error);
       });
 
       const end = performance.now();
@@ -191,6 +197,8 @@ function setupUI(user) {
             if (val !== null && val !== undefined) {
               humidities.push({date: date, value: val});
             }
+          }).catch(error => {
+            console.error('Error reading data:', error);
           });
         })(date);
         humidityPromises.push(humPromise);
@@ -250,6 +258,8 @@ function setupUI(user) {
             }
           }
         });
+      }).catch(error => {
+        console.error('Error reading data:', error);
       });
       const end = performance.now();
       const executionTime = end - start;
@@ -285,6 +295,8 @@ function setupUI(user) {
             if (val !== null && val !== undefined) {
               temperatures.push({month: month, value: val});
             }
+          }).catch(error => {
+            console.error('Error reading data:', error);
           });
         })(month);
         temperaturePromises.push(tempPromise);
@@ -296,6 +308,8 @@ function setupUI(user) {
             if (val !== null && val !== undefined) {
               humidities.push({month: month, value: val});
             }
+          }).catch(error => {
+            console.error('Error reading data:', error);
           });
         })(month);
         humidityPromises.push(humPromise);
@@ -354,6 +368,8 @@ function setupUI(user) {
           }
         });
         
+      }).catch(error => {
+        console.error('Error reading data:', error);
       });
       const end = performance.now();
       const executionTime = end - start;
@@ -392,6 +408,8 @@ function setupUI(user) {
             if (val !== null && val !== undefined) {
               temperatures.push({hours: hour, value: val});
             }
+          }).catch(error => {
+            console.error('Error reading data:', error);
           });
         })(hour);
         temperaturePromises.push(tempPromise);
@@ -404,6 +422,8 @@ function setupUI(user) {
             if (val !== null && val !== undefined) {
               humidities.push({hours: hour, value: val});
             }
+          }).catch(error => {
+            console.error('Error reading data:', error);
           });
         })(hour);
         humidityPromises.push(humPromise);
@@ -458,6 +478,8 @@ function setupUI(user) {
             }
           }
         });
+      }).catch(error => {
+        console.error('Error reading data:', error);
       });
 
       const end = performance.now();
@@ -516,6 +538,8 @@ function setupUI(user) {
               if (val !== null && val !== undefined) {
                 humidities.push({date: date, value: val});
               }
+            }).catch(error => {
+              console.error('Error reading data:', error);
             });
           })(date);
           humidityPromises.push(humPromise);
@@ -575,6 +599,8 @@ function setupUI(user) {
               }
             }
           });
+        }).catch(error => {
+          console.error('Error reading data:', error);
         });
         const end = performance.now();
         const executionTime = end - start;
@@ -628,12 +654,16 @@ function setupUI(user) {
 document.addEventListener("DOMContentLoaded", function(){
     // listen for auth status changes
     auth.onAuthStateChanged(user => {
+    try{
      if (user) {
        setupUI(user);
        var uid = user.uid;
      } else {
        setupUI();
      }
+    }catch(error){
+      console.error(error);
+    }
     });
     
     // login
