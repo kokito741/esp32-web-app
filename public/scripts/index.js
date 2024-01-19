@@ -612,9 +612,9 @@ function setupUI(user) {
     // Call updateReadings every 10seconds
     setInterval(updateReadings, 10000);
     // Call drawHistogram every 10 minutes
-    setInterval(drawHistogram_PER_HOUR, 10 * 60 * 1000);
-    setInterval(drawHistogram_PER_DAY, 10 * 60 * 1000);
-    setInterval(drawHistogram_PER_MONTH, 10 * 60 * 1000);
+    setInterval(drawHistogram_PER_HOUR(uid), 10 * 60 * 1000);
+    setInterval(drawHistogram_PER_DAY(uid), 10 * 60 * 1000);
+    setInterval(drawHistogram_PER_MONTH(uid), 10 * 60 * 1000);
 
   // if user is logged out
   } else{
