@@ -1,5 +1,5 @@
 
-const loginElement = document.querySelector('#login-form');
+let loginElement = document.querySelector('#login-form');
 const contentElement = document.querySelector("#content-sign-in");
 const userDetailsElement = document.querySelector('#user-details');
 const authBarElement = document.querySelector("#authentication-bar");
@@ -109,7 +109,7 @@ function setupUI(user) {
          // Now you can create a new chart
          var ctx = newCanvas.getContext('2d');
         var myChart_PER_HOURS = new Chart(ctx, {
-          type: 'bar',
+          type: 'line',
           data: {
             labels: temperatures.map(item => item.hours), // Use the hours from the temperatures array as labels
             datasets: [{
@@ -227,7 +227,7 @@ function setupUI(user) {
          // Now you can create a new chart
          var ctx = newCanvas.getContext('2d');
         var myChart_PER_DAYS = new Chart(ctx, {
-          type: 'bar',
+          type: 'line',
           data: {
             labels: temperatures.map(item => item.date), // Use the dates from the temperatures array as labels
             datasets: [{
@@ -255,7 +255,9 @@ function setupUI(user) {
               y: {
                 beginAtZero: true
               }
-            }
+            },
+            
+
           }
         });
       }).catch(error => {
@@ -447,7 +449,7 @@ function setupUI(user) {
           // Now you can create a new chart
           var ctx = newCanvas.getContext('2d');
         var myChart_PER_HOURS_SELECTED = new Chart(ctx, {
-          type: 'bar',
+          type: 'line',
           data: {
             labels: temperatures.map(item => item.hours), // Use the hours from the temperatures array as labels
             datasets: [{
@@ -568,7 +570,7 @@ function setupUI(user) {
            // Now you can create a new chart
            var ctx = newCanvas.getContext('2d');
           var myChart_PER_DAYS = new Chart(ctx, {
-            type: 'bar',
+            type: 'line',
             data: {
               labels: temperatures.map(item => item.date), // Use the dates from the temperatures array as labels
               datasets: [{
